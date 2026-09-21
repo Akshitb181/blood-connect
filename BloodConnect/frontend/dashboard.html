@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | BloodConnect</title>
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    :root {
+        --red: #d7193f;
+        --red-dark: #b91435;
+        --red-soft: #fff1f4;
+        --dark: #17191d;
+        --text: #30343b;
+        --muted: #747b85;
+        --border: #e9eaed;
+        --background: #f7f8fa;
+        --white: #ffffff;
+        --green: #168653;
+        --green-soft: #eaf8f0;
+        --orange: #d97706;
+        --orange-soft: #fff7e8;
+        --blue: #2563eb;
+        --blue-soft: #edf4ff;
+    }
+
+    body {
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, Arial, sans-serif;
+        background: var(--background);
+        color: var(--text);
+        min-height: 100vh;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        font: inherit;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+
+    /* =========================
+       APP LAYOUT
+    ========================= */
+
+    .app-shell {
+        min-height: 100vh;
+        display: flex;
+    }
+
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
+    .sidebar {
+        width: 255px;
+        background: var(--white);
+        border-right: 1px solid var(--border);
+        min-height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .brand {
+        height: 76px;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 0 25px;
+        border-bottom: 1px solid var(--border);
+        text-decoration: none;
+        color: var(--dark);
+        font-size: 21px;
+        font-weight: 750;
+    }
+
+    .brand-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 11px;
+        background: var(--red);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+
+    .brand span {
+        color: var(--red);
+    }
+
+    .sidebar-label {
+        padding: 25px 24px 10px;
+        font-size: 10px;
+        font-weight: 750;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #9ca1a9;
+    }
+
+    .sidebar-nav {
+        padding: 0 13px;
+    }
+
+    .sidebar-link {
+        width: 100%;
+        border: 0;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 12px 13px;
+        border-radius: 10px;
+        color: #656c76;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        text-align: left;
+        transition: 0.2s ease;
+    }
+
+    .sidebar-link i {
+        width: 20px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .sidebar-link:hover {
+        background: #f7f7f8;
+        color: var(--dark);
+    }
+
+    .sidebar-link.active {
+        background: var(--red-soft);
+        color: var(--red);
+    }
+
+    .sidebar-bottom {
+        margin-top: auto;
+        padding: 15px 13px 20px;
+        border-top: 1px solid var(--border);
+    }
+
+    .sidebar-home {
+        text-decoration: none;
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main-area {
+        margin-left: 255px;
+        width: calc(100% - 255px);
+        min-height: 100vh;
+    }
+
+
+    /* =========================
+       TOPBAR
+    ========================= */
+
+    .topbar {
+        height: 76px;
+        background: rgba(255,255,255,0.96);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 35px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .topbar-title {
+        font-size: 15px;
+        font-weight: 650;
+        color: #555b65;
+    }
+
+    .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+    }
+
+    .avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--red-soft);
+        color: var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+    .user-details {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+
+    .user-details strong {
+        font-size: 13px;
+        color: var(--dark);
+    }
+
+    .user-details small {
+        margin-top: 3px;
+        color: #8a9099;
+        font-size: 11px;
+    }
+
+    .logout-btn {
+        border: 1px solid var(--border);
+        background: white;
+        border-radius: 9px;
+        padding: 8px 12px;
+        color: #626872;
+        font-size: 12px;
+        font-weight: 650;
+    }
+
+    .logout-btn:hover {
+        border-color: #d8d9dc;
+        color: var(--red);
+    }
+
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content {
+        padding: 36px;
+        max-width: 1450px;
+    }
+
+    .welcome {
+        margin-bottom: 30px;
+    }
+
+    .welcome-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--red);
+        font-size: 11px;
+        font-weight: 750;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        margin-bottom: 9px;
+    }
+
+    .welcome h1 {
+        font-size: 31px;
+        letter-spacing: -0.8px;
+        color: var(--dark);
+        margin-bottom: 8px;
+    }
+
+    .welcome p {
+        color: var(--muted);
+        font-size: 14px;
+        max-width: 680px;
+        line-height: 1.7;
+    }
+
+
+    /* =========================
+       DASHBOARD SECTIONS
+    ========================= */
+
+    .dashboard-section {
+        display: none;
+    }
+
+    .dashboard-section.visible {
+        display: block;
+    }
+
+    .section-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 18px;
+    }
+
+    .section-heading h2 {
+        font-size: 20px;
+        color: var(--dark);
+        margin-bottom: 4px;
+    }
+
+    .section-heading p {
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+
+    /* =========================
+       OVERVIEW CARDS
+    ========================= */
+
+    .overview-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 34px;
+    }
+
+    .overview-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        padding: 20px;
+        min-height: 125px;
+    }
+
+    .overview-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .overview-icon {
+        width: 39px;
+        height: 39px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--red-soft);
+        color: var(--red);
+    }
+
+    .overview-icon.green {
+        background: var(--green-soft);
+        color: var(--green);
+    }
+
+    .overview-icon.blue {
+        background: var(--blue-soft);
+        color: var(--blue);
+    }
+
+    .overview-card-label {
+        color: #80868f;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .overview-card-value {
+        color: var(--dark);
+        font-size: 25px;
+        font-weight: 750;
+    }
+
+
+    /* =========================
+       QUICK ACTIONS
+    ========================= */
+
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 35px;
+    }
+
+    .action-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        padding: 21px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        transition: .2s ease;
+    }
+
+    .action-card:hover {
+        border-color: #d9dadd;
+        transform: translateY(-1px);
+    }
+
+    .action-left {
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .action-icon {
+        width: 43px;
+        height: 43px;
+        flex-shrink: 0;
+        border-radius: 11px;
+        background: var(--red-soft);
+        color: var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+    }
+
+    .action-card h3 {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: var(--dark);
+    }
+
+    .action-card p {
+        font-size: 12px;
+        line-height: 1.55;
+        color: var(--muted);
+        margin: 0;
+    }
+
+
+    /* =========================
+       WORKSPACE
+    ========================= */
+
+    .workspace {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        min-height: 230px;
+    }
+
+    .workspace-header {
+        padding: 19px 22px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .workspace-header h3 {
+        font-size: 15px;
+        color: var(--dark);
+        margin: 0;
+    }
+
+    .workspace-header span {
+        font-size: 11px;
+        color: #9297a0;
+    }
+
+    .workspace-body {
+        padding: 25px;
+    }
+
+    .dashboard-empty {
+        text-align: center;
+        padding: 48px 20px;
+        color: var(--muted);
+    }
+
+    .dashboard-empty i {
+        display: block;
+        font-size: 31px;
+        color: #c7cbd1;
+        margin-bottom: 13px;
+    }
+
+    .dashboard-empty h3 {
+        color: #4c5159;
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+
+    .dashboard-empty p {
+        font-size: 12px;
+        margin: 0;
+    }
+
+
+    /* =========================
+       DYNAMIC CONTENT
+    ========================= */
+
+    .dashboard-form-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        margin-top: 24px;
+    }
+
+    .dashboard-form-header {
+        margin-bottom: 25px;
+    }
+
+    .dashboard-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--red);
+        font-size: 10px;
+        font-weight: 750;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .dashboard-form-header h2 {
+        color: var(--dark);
+        font-size: 21px;
+        margin-bottom: 7px;
+    }
+
+    .dashboard-form-header p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .dashboard-form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 17px;
+        margin-bottom: 18px;
+    }
+
+    .dashboard-form-group {
+        margin-bottom: 17px;
+    }
+
+    .dashboard-form-group label {
+        display: block;
+        color: #4d535c;
+        font-size: 12px;
+        font-weight: 650;
+        margin-bottom: 7px;
+    }
+
+    .dashboard-form-group input,
+    .dashboard-form-group select,
+    .dashboard-form-group textarea {
+        width: 100%;
+        border: 1px solid #dedfe3;
+        border-radius: 9px;
+        padding: 11px 12px;
+        outline: none;
+        color: #30343a;
+        background: white;
+        font-size: 13px;
+    }
+
+    .dashboard-form-group input:focus,
+    .dashboard-form-group select:focus,
+    .dashboard-form-group textarea:focus {
+        border-color: #e26a82;
+        box-shadow: 0 0 0 3px rgba(215,25,63,.07);
+    }
+
+    .dashboard-primary-btn,
+    .dashboard-secondary-btn {
+        border-radius: 9px;
+        padding: 10px 15px;
+        font-size: 12px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 0;
+    }
+
+    .dashboard-primary-btn {
+        background: var(--red);
+        color: white;
+    }
+
+    .dashboard-primary-btn:hover {
+        background: var(--red-dark);
+    }
+
+    .dashboard-secondary-btn {
+        background: #f4f5f6;
+        color: #555b64;
+        border: 1px solid #e3e4e7;
+    }
+
+    .dashboard-secondary-btn:hover {
+        background: #ebedef;
+    }
+
+    .dashboard-form-message {
+        margin-top: 13px;
+        font-size: 12px;
+    }
+
+
+    /* =========================
+       REQUEST CARDS
+    ========================= */
+
+    .request-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 13px;
+        padding: 19px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .request-card h3 {
+        font-size: 15px;
+        color: var(--dark);
+        margin: 9px 0 7px;
+    }
+
+    .request-card p {
+        color: var(--muted);
+        font-size: 12px;
+        margin: 5px 0;
+    }
+
+    .request-blood-group {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        padding: 5px 8px;
+        border-radius: 7px;
+        background: var(--red-soft);
+        color: var(--red);
+        font-size: 11px;
+        font-weight: 800;
+    }
+
+    .request-emergency {
+        display: inline-block;
+        padding: 5px 8px;
+        border-radius: 7px;
+        background: var(--orange-soft);
+        color: var(--orange);
+        font-size: 10px;
+        font-weight: 750;
+        margin-left: 5px;
+    }
+
+    .request-status {
+        display: inline-flex;
+        padding: 5px 9px;
+        border-radius: 7px;
+        background: #f1f2f4;
+        color: #69707a;
+        font-size: 10px;
+        font-weight: 750;
+        text-transform: capitalize;
+        margin-left: 5px;
+    }
+
+    .status-accepted {
+        background: var(--blue-soft);
+        color: var(--blue);
+    }
+
+    .status-completed {
+        background: var(--green-soft);
+        color: var(--green);
+    }
+
+    .status-cancelled {
+        background: #f5f5f5;
+        color: #777;
+    }
+
+    .request-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+
+    /* =========================
+       AVAILABILITY
+    ========================= */
+
+    .availability-toggle {
+        display: flex !important;
+        align-items: center;
+        gap: 9px;
+        cursor: pointer;
+    }
+
+    .availability-toggle input {
+        width: auto !important;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+        .sidebar {
+            width: 215px;
+        }
+
+        .main-area {
+            margin-left: 215px;
+            width: calc(100% - 215px);
+        }
+
+        .overview-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .quick-actions {
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+        .sidebar {
+            position: relative;
+            width: 100%;
+            min-height: auto;
+            border-right: 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .app-shell {
+            display: block;
+        }
+
+        .main-area {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        .sidebar-nav {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .sidebar-bottom {
+            margin-top: 0;
+        }
+
+        .topbar {
+            padding: 0 18px;
+        }
+
+        .content {
+            padding: 24px 16px;
+        }
+
+        .user-details {
+            display: none;
+        }
+
+        .welcome h1 {
+            font-size: 25px;
+        }
+
+        .dashboard-form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .request-card {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .request-actions {
+            justify-content: flex-start;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="app-shell">
+
+```
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <a href="/" class="brand">
+
+        <div class="brand-icon">
+            <i class="bi bi-droplet-fill"></i>
+        </div>
+
+        Blood<span>Connect</span>
+
+    </a>
+
+
+    <div class="sidebar-label">
+        Main Menu
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <button
+            id="overviewNav"
+            class="sidebar-link active"
+            onclick="showDashboardOverview()"
+        >
+            <i class="bi bi-grid-1x2"></i>
+            Overview
+        </button>
+
+
+        <!-- DONOR NAV -->
+
+        <div id="donorNavigation" style="display:none;">
+
+            <button
+                class="sidebar-link"
+                onclick="showDonorRequests()"
+            >
+                <i class="bi bi-inbox"></i>
+                Blood Requests
+            </button>
+
+            <button
+                class="sidebar-link"
+                onclick="showDonationHistory()"
+            >
+                <i class="bi bi-clock-history"></i>
+                Donation History
+            </button>
+
+            <button
+                class="sidebar-link"
+                onclick="showDonorProfile()"
+            >
+                <i class="bi bi-person-heart"></i>
+                Donor Profile
+            </button>
+
+        </div>
+
+
+        <!-- RECEIVER NAV -->
+
+        <div id="receiverNavigation" style="display:none;">
+
+            <button
+                class="sidebar-link"
+                onclick="showBloodRequestForm()"
+            >
+                <i class="bi bi-plus-circle"></i>
+                Request Blood
+            </button>
+
+            <button class="sidebar-link" onclick="showActiveRequests()">
+    <i class="bi bi-activity"></i>Active Requests
+</button>
+
+            <button
+                class="sidebar-link"
+                onclick="showRequestHistory()"
+            >
+                <i class="bi bi-clock-history"></i>
+                Request History
+            </button>
+
+            <button
+                class="sidebar-link"
+                onclick="showFindDonors()"
+            >
+                <i class="bi bi-search"></i>
+                Find Donors
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="/" class="sidebar-link sidebar-home">
+            <i class="bi bi-house"></i>
+            Back to Home
+        </a>
+
+        <button
+            class="sidebar-link"
+            onclick="logoutUser()"
+        >
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- MAIN AREA -->
+
+<div class="main-area">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="topbar-title">
+            BloodConnect Dashboard
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="user-profile">
+
+                <div
+                    class="avatar"
+                    id="userAvatar"
+                >
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <small id="userRole">
+                        Account
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout-btn"
+                onclick="logoutUser()"
+            >
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- PAGE CONTENT -->
+
+    <main class="content">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <div class="welcome-label">
+                <i class="bi bi-shield-check"></i>
+                Secure Blood Management
+            </div>
+
+            <h1 id="welcomeText">
+                Welcome back
+            </h1>
+
+            <p id="dashboardDescription">
+                Manage your BloodConnect activity from one place.
+            </p>
+
+        </section>
+
+
+
+        <!-- DONOR DASHBOARD -->
+
+        <section
+            id="donorDashboard"
+            class="dashboard-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Donor Overview</h2>
+
+                    <p>
+                        Manage incoming requests, your availability
+                        and completed donations.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+                <div class="overview-card">
+
+                    <div class="overview-card-top">
+
+                        <span class="overview-card-label">
+                            Donor Status
+                        </span>
+
+                        <div class="overview-icon green">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="overview-card-value">
+                        Active
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <div class="overview-card-top">
+
+                        <span class="overview-card-label">
+                            Incoming Requests
+                        </span>
+
+                        <div class="overview-icon">
+                            <i class="bi bi-inbox"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="overview-card-value">
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <div class="overview-card-top">
+
+                        <span class="overview-card-label">
+                            Donations
+                        </span>
+
+                        <div class="overview-icon blue">
+                            <i class="bi bi-droplet"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="overview-card-value">
+                        —
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+                <div class="action-card">
+
+                    <div class="action-left">
+
+                        <div class="action-icon">
+                            <i class="bi bi-inbox"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>Manage Blood Requests</h3>
+
+                            <p>
+                                Review matching patients and
+                                accept or reject requests.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="dashboard-primary-btn"
+                        onclick="showDonorRequests()"
+                    >
+                        Open
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="action-card">
+
+                    <div class="action-left">
+
+                        <div class="action-icon">
+                            <i class="bi bi-person-heart"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>Manage Donor Profile</h3>
+
+                            <p>
+                                Update blood group, location,
+                                phone and availability.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="dashboard-secondary-btn"
+                        onclick="showDonorProfile()"
+                    >
+                        Manage
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="workspace">
+
+                <div class="workspace-header">
+
+                    <h3>Donor Activity</h3>
+
+                    <span>
+                        Select an option from the dashboard
+                    </span>
+
+                </div>
+
+                <div
+                    id="donorContent"
+                    class="workspace-body"
+                >
+
+                    <div class="dashboard-empty">
+
+                        <i class="bi bi-heart-pulse"></i>
+
+                        <h3>
+                            Your donor activity
+                        </h3>
+
+                        <p>
+                            Incoming requests and donation
+                            information will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- RECEIVER DASHBOARD -->
+
+        <section
+            id="receiverDashboard"
+            class="dashboard-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>Receiver Overview</h2>
+
+                    <p>
+                        Create requests, find donors and track
+                        your blood requirements.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+                <div class="overview-card">
+
+                    <div class="overview-card-top">
+
+                        <span class="overview-card-label">
+                            Active Requests
+                        </span>
+
+                        <div class="overview-icon">
+                            <i class="bi bi-droplet-half"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="overview-card-value">
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <div class="overview-card-top">
+
+                        <span class="overview-card-label">
+                            Donor Matches
+                        </span>
+
+                        <div class="overview-icon green">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="overview-card-value">
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <div class="overview-card-top">
+
+                        <span class="overview-card-label">
+                            Request History
+                        </span>
+
+                        <div class="overview-icon blue">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="overview-card-value">
+                        —
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+                <div class="action-card">
+
+                    <div class="action-left">
+
+                        <div class="action-icon">
+                            <i class="bi bi-plus-circle"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>Create Blood Request</h3>
+
+                            <p>
+                                Submit a request with blood group,
+                                component, units and hospital details.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="dashboard-primary-btn"
+                        onclick="showBloodRequestForm()"
+                    >
+                        Create
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="action-card">
+
+                    <div class="action-left">
+
+                        <div class="action-icon">
+                            <i class="bi bi-search-heart"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>Find Available Donors</h3>
+
+                            <p>
+                                Search available donors by blood
+                                group and location.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="dashboard-secondary-btn"
+                        onclick="showFindDonors()"
+                    >
+                        Search
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="workspace">
+
+                <div class="workspace-header">
+
+                    <h3>Request Management</h3>
+
+                    <span>
+                        Track your blood requests here
+                    </span>
+
+                </div>
+
+                <div
+                    id="receiverContent"
+                    class="workspace-body"
+                >
+
+                    <div class="dashboard-empty">
+
+                        <i class="bi bi-droplet"></i>
+
+                        <h3>
+                            Your blood requests
+                        </h3>
+
+                        <p>
+                            Active requests, matching donors and
+                            request history will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+```
+
+</div>
+
+<script>
+
+    /*
+     * Small dashboard navigation helper.
+     * The existing script.js functions continue to handle
+     * all API operations and dynamic content.
+     */
+
+    function showDashboardOverview() {
+
+        const donorContent =
+            document.getElementById("donorContent");
+
+        const receiverContent =
+            document.getElementById("receiverContent");
+
+        if (donorContent) {
+
+            donorContent.innerHTML = `
+                <div class="dashboard-empty">
+                    <i class="bi bi-heart-pulse"></i>
+                    <h3>Your donor activity</h3>
+                    <p>
+                        Use the sidebar to manage requests,
+                        donations and your donor profile.
+                    </p>
+                </div>
+            `;
+
+        }
+
+        if (receiverContent) {
+
+            receiverContent.innerHTML = `
+                <div class="dashboard-empty">
+                    <i class="bi bi-droplet"></i>
+                    <h3>Your blood requests</h3>
+                    <p>
+                        Use the sidebar to create requests,
+                        find donors or view request history.
+                    </p>
+                </div>
+            `;
+
+        }
+
+        document
+            .querySelectorAll(".sidebar-link")
+            .forEach(link => link.classList.remove("active"));
+
+        const overview =
+            document.getElementById("overviewNav");
+
+        if (overview) {
+            overview.classList.add("active");
+        }
+
+    }
+
+
+    function activateSidebarButton(button) {
+
+        document
+            .querySelectorAll(".sidebar-link")
+            .forEach(link => link.classList.remove("active"));
+
+        if (button) {
+            button.classList.add("active");
+        }
+
+    }
+
+
+    document.addEventListener("click", function(event) {
+
+        const button =
+            event.target.closest(".sidebar-link");
+
+        if (button) {
+            activateSidebarButton(button);
+        }
+
+    });
+
+</script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | BloodConnect</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            color: #17191d;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #ececef;
+        }
+
+        .nav {
+            max-width: 1240px;
+            margin: auto;
+            min-height: 76px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-size: 21px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: #c91f2c;
+            color: white;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .brand span:last-child {
+            color: #17191d;
+        }
+
+        .brand span:last-child b {
+            color: #c91f2c;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .nav-links a {
+            padding: 9px 13px;
+            border-radius: 9px;
+            color: #555960;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #c91f2c;
+            background: #fff1f2;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login {
+            font-size: 14px;
+            font-weight: 700;
+            color: #44474d;
+        }
+
+        .donor-btn {
+            background: #c91f2c;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .donor-btn:hover {
+            background: #a91723;
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background:
+                radial-gradient(circle at 85% 20%, rgba(255,255,255,0.13), transparent 25%),
+                linear-gradient(135deg, #8f101b, #c91f2c 55%, #df3743);
+            color: white;
+            min-height: 570px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-inner {
+            width: min(1240px, 100%);
+            margin: auto;
+            padding: 90px 24px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.35);
+            padding: 7px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 5vw, 70px);
+            line-height: 1.03;
+            letter-spacing: -2.5px;
+            max-width: 720px;
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            font-size: 18px;
+            color: rgba(255,255,255,0.88);
+            margin-bottom: 34px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+
+        .hero-primary,
+        .hero-secondary {
+            padding: 13px 20px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .hero-primary {
+            background: white;
+            color: #b51925;
+        }
+
+        .hero-secondary {
+            border: 1px solid rgba(255,255,255,0.5);
+            color: white;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .network-card {
+            width: 390px;
+            max-width: 100%;
+            background: rgba(255,255,255,0.11);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 24px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .network-title {
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 800;
+            opacity: 0.75;
+            margin-bottom: 30px;
+        }
+
+        .network-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .person {
+            text-align: center;
+            width: 105px;
+        }
+
+        .person-icon {
+            width: 70px;
+            height: 70px;
+            margin: auto auto 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 29px;
+        }
+
+        .person strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .person small {
+            opacity: 0.7;
+            font-size: 11px;
+        }
+
+        .connection {
+            flex: 1;
+            height: 2px;
+            background: rgba(255,255,255,0.4);
+            position: relative;
+        }
+
+        .connection::after {
+            content: "›";
+            position: absolute;
+            right: -2px;
+            top: -14px;
+            font-size: 27px;
+        }
+
+        .live-status {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.18);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #6ff29a;
+        }
+
+        /* =========================
+           IMPACT
+        ========================= */
+
+        .impact {
+            max-width: 1240px;
+            margin: auto;
+            padding: 75px 24px;
+        }
+
+        .section-heading {
+            max-width: 700px;
+            margin-bottom: 42px;
+        }
+
+        .section-label {
+            color: #c91f2c;
+            font-size: 12px;
+            letter-spacing: 1.7px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .section-heading h2 {
+            font-size: 39px;
+            line-height: 1.12;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .section-heading p {
+            color: #666a71;
+            font-size: 16px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid #e7e7ea;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .stat {
+            padding: 30px;
+            background: #fff;
+            border-right: 1px solid #e7e7ea;
+        }
+
+        .stat:last-child {
+            border-right: 0;
+        }
+
+        .stat-number {
+            font-size: 35px;
+            font-weight: 850;
+            color: #c91f2c;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: #676a70;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           MISSION
+        ========================= */
+
+        .mission {
+            background: #f7f7f8;
+            padding: 95px 24px;
+        }
+
+        .mission-inner {
+            max-width: 1240px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .mission-visual {
+            min-height: 400px;
+            background: #17191d;
+            border-radius: 24px;
+            padding: 35px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .mission-visual-label {
+            color: #aeb1b7;
+            font-size: 11px;
+            letter-spacing: 1.7px;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .mission-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .flow-box {
+            border: 1px solid #383b41;
+            border-radius: 13px;
+            padding: 17px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .flow-icon {
+            width: 42px;
+            height: 42px;
+            background: #c91f2c;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .flow-box strong {
+            font-size: 14px;
+        }
+
+        .flow-box small {
+            display: block;
+            color: #9a9da4;
+            font-size: 11px;
+        }
+
+        .mission-content h2 {
+            font-size: 44px;
+            line-height: 1.1;
+            letter-spacing: -1.3px;
+            margin-bottom: 22px;
+        }
+
+        .mission-content > p {
+            color: #666a71;
+            font-size: 16px;
+            margin-bottom: 28px;
+        }
+
+        .mission-point {
+            padding: 18px 0;
+            border-top: 1px solid #dedee1;
+            display: flex;
+            gap: 15px;
+        }
+
+        .check {
+            color: #c91f2c;
+            font-weight: 900;
+        }
+
+        .mission-point strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .mission-point span {
+            color: #6a6d73;
+            font-size: 14px;
+        }
+
+        /* =========================
+           WHY US
+        ========================= */
+
+        .why {
+            max-width: 1240px;
+            margin: auto;
+            padding: 95px 24px;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .why-card {
+            border: 1px solid #e5e5e8;
+            border-radius: 17px;
+            padding: 27px;
+            min-height: 220px;
+            transition: 0.2s;
+        }
+
+        .why-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(20,20,30,0.07);
+        }
+
+        .why-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 11px;
+            background: #fff0f1;
+            color: #c91f2c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .why-card h3 {
+            font-size: 18px;
+            margin-bottom: 9px;
+        }
+
+        .why-card p {
+            color: #6a6d73;
+            font-size: 14px;
+        }
+
+        /* =========================
+           HOW NETWORK WORKS
+        ========================= */
+
+        .network-section {
+            background: #fff4f5;
+            padding: 90px 24px;
+        }
+
+        .network-inner {
+            max-width: 1100px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .network-inner h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .network-inner > p {
+            max-width: 650px;
+            margin: 0 auto 55px;
+            color: #686b72;
+        }
+
+        .network-steps {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .network-step {
+            background: white;
+            border: 1px solid #eadbdd;
+            border-radius: 17px;
+            padding: 28px 20px;
+        }
+
+        .network-step .big-icon {
+            font-size: 30px;
+            margin-bottom: 14px;
+        }
+
+        .network-step h3 {
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .network-step p {
+            color: #70737a;
+            font-size: 13px;
+        }
+
+        .arrow {
+            font-size: 27px;
+            color: #c91f2c;
+            font-weight: 900;
+        }
+
+        /* =========================
+           TECHNOLOGY
+        ========================= */
+
+        .technology {
+            max-width: 1240px;
+            margin: auto;
+            padding: 95px 24px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .tech-card {
+            padding: 25px;
+            border-left: 3px solid #c91f2c;
+            background: #f8f8f9;
+        }
+
+        .tech-card strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .tech-card span {
+            color: #70737a;
+            font-size: 13px;
+        }
+
+        /* =========================
+           FUTURE
+        ========================= */
+
+        .future {
+            background: #17191d;
+            color: white;
+            padding: 95px 24px;
+        }
+
+        .future-inner {
+            max-width: 1240px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 80px;
+        }
+
+        .future h2 {
+            font-size: 44px;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .future p {
+            color: #aeb1b7;
+            max-width: 500px;
+        }
+
+        .future-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .future-item {
+            border: 1px solid #373a40;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .future-item strong {
+            font-size: 14px;
+        }
+
+        .future-item span {
+            display: block;
+            color: #999ca3;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            max-width: 1240px;
+            margin: auto;
+            padding: 95px 24px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 45px;
+            line-height: 1.1;
+            margin-bottom: 17px;
+        }
+
+        .cta p {
+            color: #686b72;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: #c91f2c;
+            color: white;
+            padding: 14px 23px;
+            border-radius: 9px;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #111216;
+            color: #aaa;
+            padding: 35px 24px;
+        }
+
+        .footer-inner {
+            max-width: 1240px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .footer-brand {
+            color: white;
+            font-weight: 800;
+        }
+
+        .footer-brand span {
+            color: #c91f2c;
+        }
+
+        footer p {
+            font-size: 12px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-inner,
+            .mission-inner,
+            .future-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat:nth-child(2) {
+                border-right: 0;
+            }
+
+            .stat:nth-child(-n+2) {
+                border-bottom: 1px solid #e7e7ea;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .network-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .nav {
+                min-height: 68px;
+                padding: 0 16px;
+            }
+
+            .login {
+                display: none;
+            }
+
+            .donor-btn {
+                padding: 9px 12px;
+                font-size: 12px;
+            }
+
+            .hero-inner {
+                padding: 70px 20px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .stats,
+            .why-grid,
+            .tech-grid,
+            .future-list {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: 0;
+                border-bottom: 1px solid #e7e7ea;
+            }
+
+            .stat:last-child {
+                border-bottom: 0;
+            }
+
+            .mission-content h2,
+            .future h2,
+            .cta h2,
+            .network-inner h2 {
+                font-size: 34px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="topbar">
+        <nav class="nav">
+
+            <a href="index.html" class="brand">
+                <span class="brand-icon">+</span>
+                <span>Blood<b>Connect</b></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#find-donor">Find Donors</a>
+                <a href="education.html">Education</a>
+                <a href="index.html#how-it-works">How It Works</a>
+                <a href="about.html" class="active">About</a>
+            </div>
+
+            <div class="nav-actions">
+                <a href="login.html" class="login">Log in</a>
+                <a href="register.html" class="donor-btn">Become a Donor</a>
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-inner">
+
+            <div>
+                <div class="eyebrow">ABOUT BLOODCONNECT</div>
+
+                <h1>
+                    Technology that brings donors and patients closer.
+                </h1>
+
+                <p>
+                    BloodConnect is a blood donation and request management
+                    platform designed to make finding compatible donors,
+                    raising requests and managing donations simpler.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="register.html" class="hero-primary">
+                        Become a Donor
+                    </a>
+
+                    <a href="index.html#find-donor" class="hero-secondary">
+                        Find a Donor
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="hero-visual">
+
+                <div class="network-card">
+
+                    <div class="network-title">
+                        BLOODCONNECT NETWORK
+                    </div>
+
+                    <div class="network-line">
+
+                        <div class="person">
+                            <div class="person-icon">🩸</div>
+                            <strong>Donor</strong>
+                            <small>Ready to help</small>
+                        </div>
+
+                        <div class="connection"></div>
+
+                        <div class="person">
+                            <div class="person-icon">♥</div>
+                            <strong>BloodConnect</strong>
+                            <small>Matches requests</small>
+                        </div>
+
+                        <div class="connection"></div>
+
+                        <div class="person">
+                            <div class="person-icon">+</div>
+                            <strong>Receiver</strong>
+                            <small>Needs blood</small>
+                        </div>
+
+                    </div>
+
+                    <div class="live-status">
+                        <span class="live-dot"></span>
+                        Connected platform for blood requests
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- IMPACT -->
+    <section class="impact">
+
+        <div class="section-heading">
+
+            <div class="section-label">OUR PLATFORM</div>
+
+            <h2>
+                Built around a simple idea.
+            </h2>
+
+            <p>
+                A blood request should be easier to create, discover and
+                manage from one connected platform.
+            </p>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-number">01</div>
+                <div class="stat-label">Connected donor network</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Request availability</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Blood components supported</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Centralized platform</div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MISSION -->
+    <section class="mission">
+
+        <div class="mission-inner">
+
+            <div class="mission-visual">
+
+                <div class="mission-visual-label">
+                    HOW BLOODCONNECT CONNECTS PEOPLE
+                </div>
+
+                <div class="mission-flow">
+
+                    <div class="flow-box">
+                        <div class="flow-icon">🩸</div>
+                        <div>
+                            <strong>Donor registers</strong>
+                            <small>Blood group, location and availability</small>
+                        </div>
+                    </div>
+
+                    <div class="flow-box">
+                        <div class="flow-icon">⌕</div>
+                        <div>
+                            <strong>Request is matched</strong>
+                            <small>Compatible donors can be discovered</small>
+                        </div>
+                    </div>
+
+                    <div class="flow-box">
+                        <div class="flow-icon">♥</div>
+                        <div>
+                            <strong>Donation is completed</strong>
+                            <small>The request can move toward fulfillment</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="mission-content">
+
+                <div class="section-label">
+                    OUR MISSION
+                </div>
+
+                <h2>
+                    Finding a blood donor should not feel complicated.
+                </h2>
+
+                <p>
+                    BloodConnect brings donor information, blood requests,
+                    matching and donation records together in one place.
+                    The goal is to reduce unnecessary steps between someone
+                    willing to donate and someone looking for blood.
+                </p>
+
+                <div class="mission-point">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Discover compatible donors</strong>
+                        <span>
+                            Search using blood group and location.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mission-point">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Manage blood requests</strong>
+                        <span>
+                            Create, track and respond to requests through the platform.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mission-point">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Keep donation information organized</strong>
+                        <span>
+                            Donor availability and completed donations can be tracked.
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- WHY BLOODCONNECT -->
+    <section class="why">
+
+        <div class="section-heading">
+
+            <div class="section-label">WHY BLOODCONNECT</div>
+
+            <h2>
+                Designed around the real blood-request journey.
+            </h2>
+
+            <p>
+                Instead of treating blood donation as disconnected forms,
+                BloodConnect connects the major steps together.
+            </p>
+
+        </div>
+
+
+        <div class="why-grid">
+
+            <div class="why-card">
+                <div class="why-icon">⌕</div>
+                <h3>Donor discovery</h3>
+                <p>
+                    Search registered donors using blood group and location.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">+</div>
+                <h3>Blood requests</h3>
+                <p>
+                    Receivers can create requests containing the required
+                    blood group, component, units and hospital.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">✓</div>
+                <h3>Matching</h3>
+                <p>
+                    The platform identifies donors who match the request
+                    requirements.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">●</div>
+                <h3>Availability</h3>
+                <p>
+                    Donors can maintain their availability status for
+                    potential requests.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">↗</div>
+                <h3>Request tracking</h3>
+                <p>
+                    Requests can move through stages such as pending,
+                    accepted, rejected and completed.
+                </p>
+            </div>
+
+            <div class="why-card">
+                <div class="why-icon">▣</div>
+                <h3>Donation history</h3>
+                <p>
+                    Completed donations can be recorded and viewed as part
+                    of the donor's history.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- NETWORK -->
+    <section class="network-section">
+
+        <div class="network-inner">
+
+            <div class="section-label">THE BLOODCONNECT FLOW</div>
+
+            <h2>
+                One request. One connected process.
+            </h2>
+
+            <p>
+                BloodConnect connects the people and information involved
+                in a blood donation request.
+            </p>
+
+
+            <div class="network-steps">
+
+                <div class="network-step">
+                    <div class="big-icon">🩸</div>
+                    <h3>Donor</h3>
+                    <p>
+                        Registers and provides blood group,
+                        location and availability.
+                    </p>
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="network-step">
+                    <div class="big-icon">⌕</div>
+                    <h3>BloodConnect</h3>
+                    <p>
+                        Connects requests with compatible
+                        available donors.
+                    </p>
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="network-step">
+                    <div class="big-icon">♥</div>
+                    <h3>Receiver</h3>
+                    <p>
+                        Creates and manages a request for
+                        the required blood.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TECHNOLOGY -->
+    <section class="technology">
+
+        <div class="section-heading">
+
+            <div class="section-label">TECHNOLOGY</div>
+
+            <h2>
+                Built as a real full-stack application.
+            </h2>
+
+            <p>
+                BloodConnect combines a browser-based frontend with a
+                Node.js backend and MongoDB database.
+            </p>
+
+        </div>
+
+
+        <div class="tech-grid">
+
+            <div class="tech-card">
+                <strong>HTML & CSS</strong>
+                <span>Interface and responsive page structure</span>
+            </div>
+
+            <div class="tech-card">
+                <strong>JavaScript</strong>
+                <span>Frontend interactions and API communication</span>
+            </div>
+
+            <div class="tech-card">
+                <strong>Node.js + Express</strong>
+                <span>Backend server and REST API</span>
+            </div>
+
+            <div class="tech-card">
+                <strong>MongoDB</strong>
+                <span>User, request and donation data storage</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FUTURE -->
+    <section class="future">
+
+        <div class="future-inner">
+
+            <div>
+
+                <div class="section-label">
+                    FUTURE DIRECTION
+                </div>
+
+                <h2>
+                    The platform can grow beyond the first version.
+                </h2>
+
+                <p>
+                    The current system provides the foundation for a broader
+                    blood donation network. Future versions can connect more
+                    people, organizations and services.
+                </p>
+
+            </div>
+
+
+            <div class="future-list">
+
+                <div class="future-item">
+                    <strong>Mobile application</strong>
+                    <span>Access the network from smartphones.</span>
+                </div>
+
+                <div class="future-item">
+                    <strong>Hospital integration</strong>
+                    <span>Connect requests with participating hospitals.</span>
+                </div>
+
+                <div class="future-item">
+                    <strong>Blood-bank integration</strong>
+                    <span>Improve access to institutional blood inventory.</span>
+                </div>
+
+                <div class="future-item">
+                    <strong>GPS-based discovery</strong>
+                    <span>Improve location-based donor discovery.</span>
+                </div>
+
+                <div class="future-item">
+                    <strong>Push notifications</strong>
+                    <span>Notify donors about relevant requests.</span>
+                </div>
+
+                <div class="future-item">
+                    <strong>Smart recommendations</strong>
+                    <span>Assist with more intelligent donor matching.</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+
+        <div class="section-label">
+            JOIN THE NETWORK
+        </div>
+
+        <h2>
+            One donation can make a difference.
+        </h2>
+
+        <p>
+            Register as a donor or use BloodConnect to find compatible
+            donors when a blood request is needed.
+        </p>
+
+        <a href="register.html" class="cta-btn">
+            Become a Donor
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-inner">
+
+            <div class="footer-brand">
+                Blood<span>Connect</span>
+            </div>
+
+            <p>
+                Blood Donation & Request Management System
+            </p>
+
+            <p>
+                © 2026 BloodConnect
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

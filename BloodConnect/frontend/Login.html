@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | BloodConnect</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-page">
+
+    <div class="auth-page-wrapper">
+
+        <div class="auth-page-left">
+
+            <a href="/" class="auth-brand">
+                <span class="brand-drop">
+                    <i class="bi bi-droplet-fill"></i>
+                </span>
+
+                <span>
+                    Blood<span>Connect</span>
+                </span>
+            </a>
+
+            <div class="auth-intro">
+
+                <span class="auth-badge">
+                    <i class="bi bi-shield-check"></i>
+                    Trusted Blood Donation Network
+                </span>
+
+                <h1>
+                    Every drop<br>
+                    <span>connects a life.</span>
+                </h1>
+
+                <p>
+                    Connect with blood donors and receivers when it matters most.
+                    Your next connection could help save a life.
+                </p>
+
+                <div class="auth-points">
+
+                    <div>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Find compatible blood donors
+                    </div>
+
+                    <div>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Send and receive blood requests
+                    </div>
+
+                    <div>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Track your donation activity
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="auth-page-right">
+
+            <div class="auth-form-container">
+
+                <a href="/" class="mobile-auth-brand">
+                    <i class="bi bi-droplet-fill"></i>
+                    BloodConnect
+                </a>
+
+                <div class="auth-form-header">
+
+                    <h2>Welcome back</h2>
+
+                    <p>
+                        Login to your BloodConnect account
+                    </p>
+
+                </div>
+
+
+                <form id="loginForm">
+
+                    <div class="auth-input-group">
+
+                        <label for="loginEmail">
+                            Email Address
+                        </label>
+
+                        <div class="auth-input-wrapper">
+
+                            <i class="bi bi-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="loginEmail"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="auth-input-group">
+
+                        <label for="loginPassword">
+                            Password
+                        </label>
+
+                        <div class="auth-input-wrapper">
+
+                            <i class="bi bi-lock"></i>
+
+                            <input
+                                type="password"
+                                id="loginPassword"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="auth-page-submit"
+                    >
+                        Login
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+
+                    <p
+                        id="loginMessage"
+                        class="auth-page-message"
+                    ></p>
+
+                </form>
+
+
+                <div class="auth-divider">
+                    <span>OR</span>
+                </div>
+
+
+                <div class="auth-create">
+
+                    Don't have an account?
+
+                    <a href="/register.html">
+                        Create an account
+                    </a>
+
+                </div>
+
+
+                <a href="/" class="back-home">
+                    <i class="bi bi-arrow-left"></i>
+                    Back to BloodConnect
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

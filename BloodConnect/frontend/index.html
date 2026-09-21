@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BloodConnect | Connecting Donors. Saving Lives.</title>
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar navbar-expand-lg bg-white fixed-top">
+        <div class="container">
+
+            <a class="navbar-brand" href="#home">
+                <span class="brand-icon">
+                    <i class="bi bi-droplet-fill"></i>
+                </span>
+
+                Blood<span>Connect</span>
+
+                <small class="verified-badge">
+                    <i class="bi bi-patch-check-fill"></i>
+                    Verified
+                </small>
+            </a>
+
+            <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+
+                <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#find-donor">
+                            Find Donors
+                        </a>
+                    </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="education.html">
+        Education
+    </a>
+</li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">
+                            How It Works
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+    <a class="nav-link" href="about.html">
+        About
+    </a>
+</li>
+
+                </ul>
+
+                <div class="nav-actions">
+
+                    <button class="btn-login" onclick="window.location.href='/login.html'">
+                        Log in
+                    </button>
+
+                    <button class="btn-primary-custom"
+                        onclick="showRegister()">
+
+                        <i class="bi bi-heart-pulse"></i>
+                        Become a Donor
+
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero-section" id="home">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-6">
+
+                    <div class="hero-badge">
+                        <span class="live-dot"></span>
+                        A connected blood donation network
+                    </div>
+
+                    <h1>
+                        Every drop
+                        <span>connects a life.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        BloodConnect connects blood donors with people
+                        who need blood, making the search faster,
+                        simpler and more organized.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="#find-donor"
+                            class="hero-primary-btn">
+
+                            <i class="bi bi-search"></i>
+                            Find a Donor
+
+                        </a>
+
+                        <button class="hero-secondary-btn"
+                            onclick="showRegister()">
+
+                            Become a Donor
+                            <i class="bi bi-arrow-right"></i>
+
+                        </button>
+
+                    </div>
+
+                    <div class="hero-features">
+
+                        <span>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Blood group matching
+                        </span>
+
+                        <span>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Location-based search
+                        </span>
+
+                        <span>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Emergency requests
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HERO MEDICAL CARD -->
+
+                <div class="col-lg-6">
+
+                    <div class="hero-dashboard">
+
+                        <div class="dashboard-header">
+
+                            <div>
+                                <small>BloodConnect Network</small>
+                                <h3>Donor availability</h3>
+                            </div>
+
+                            <div class="online-status">
+                                <span></span>
+                                Live
+                            </div>
+
+                        </div>
+
+
+                        <div class="blood-grid">
+
+                            <div class="blood-type-card">
+                                <span>O+</span>
+                                <strong>Available</strong>
+                                <small>Donors nearby</small>
+                            </div>
+
+                            <div class="blood-type-card">
+                                <span>A+</span>
+                                <strong>Available</strong>
+                                <small>Donors nearby</small>
+                            </div>
+
+                            <div class="blood-type-card">
+                                <span>B+</span>
+                                <strong>Available</strong>
+                                <small>Donors nearby</small>
+                            </div>
+
+                            <div class="blood-type-card">
+                                <span>AB+</span>
+                                <strong>Available</strong>
+                                <small>Donors nearby</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="dashboard-request">
+
+                            <div class="request-icon">
+                                <i class="bi bi-heart-pulse-fill"></i>
+                            </div>
+
+                            <div>
+                                <small>Recent blood request</small>
+                                <strong>O+ · Ghaziabad</strong>
+                            </div>
+
+                            <i class="bi bi-arrow-up-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats-section">
+
+        <div class="container">
+
+            <div class="stats-card">
+
+                <div class="stat">
+                    <strong>8</strong>
+                    <span>Blood Groups</span>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <div class="stat">
+                    <strong>24/7</strong>
+                    <span>Request Access</span>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <div class="stat">
+                    <strong>2</strong>
+                    <span>User Roles</span>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <div class="stat">
+                    <strong>1</strong>
+                    <span>Connected Platform</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PROBLEM ================= -->
+
+    <section class="problem-section" id="about">
+
+        <div class="container">
+
+            <div class="section-heading left-heading">
+
+                <div class="section-label">
+                    WHY BLOODCONNECT
+                </div>
+
+                <h2>
+                    Finding blood shouldn't
+                    feel impossible.
+                </h2>
+
+                <p>
+                    When someone needs blood, every minute matters.
+                    BloodConnect creates a centralized platform where
+                    receivers can find available donors based on
+                    blood group and location.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-number">01</div>
+
+                    <div class="feature-icon">
+                        <i class="bi bi-search"></i>
+                    </div>
+
+                    <h3>Find compatible donors</h3>
+
+                    <p>
+                        Search for available donors using blood group
+                        and location.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-number">02</div>
+
+                    <div class="feature-icon">
+                        <i class="bi bi-lightning-charge"></i>
+                    </div>
+
+                    <h3>Send blood requests</h3>
+
+                    <p>
+                        Create normal or emergency blood requests
+                        with hospital and location details.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-number">03</div>
+
+                    <div class="feature-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <h3>Connect both sides</h3>
+
+                    <p>
+                        Donors and receivers stay connected through
+                        the complete request workflow.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+
+    <section class="how-section" id="how-it-works">
+
+        <div class="container">
+
+            <div class="section-heading center-heading">
+
+                <div class="section-label">
+                    HOW IT WORKS
+                </div>
+
+                <h2>
+                    One platform.<br>
+                    One connected process.
+                </h2>
+
+                <p>
+                    BloodConnect brings together donors and receivers
+                    through a simple digital workflow.
+                </p>
+
+            </div>
+
+
+            <div class="workflow">
+
+                <div class="workflow-card">
+
+                    <div class="workflow-icon">
+                        <i class="bi bi-person-plus"></i>
+                    </div>
+
+                    <span>01</span>
+
+                    <h3>Create an account</h3>
+
+                    <p>
+                        Register as a donor or receiver.
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-arrow">
+                    <i class="bi bi-arrow-right"></i>
+                </div>
+
+
+                <div class="workflow-card">
+
+                    <div class="workflow-icon">
+                        <i class="bi bi-clipboard2-pulse"></i>
+                    </div>
+
+                    <span>02</span>
+
+                    <h3>Create or search</h3>
+
+                    <p>
+                        Request blood or search for donors.
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-arrow">
+                    <i class="bi bi-arrow-right"></i>
+                </div>
+
+
+                <div class="workflow-card">
+
+                    <div class="workflow-icon">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+
+                    <span>03</span>
+
+                    <h3>Connect</h3>
+
+                    <p>
+                        Matching donors respond to requests.
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-arrow">
+                    <i class="bi bi-arrow-right"></i>
+                </div>
+
+
+                <div class="workflow-card">
+
+                    <div class="workflow-icon">
+                        <i class="bi bi-heart-fill"></i>
+                    </div>
+
+                    <span>04</span>
+
+                    <h3>Complete donation</h3>
+
+                    <p>
+                        Donation is completed and recorded.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FIND DONOR ================= -->
+
+    <section class="find-section" id="find-donor">
+
+        <div class="container">
+
+            <div class="find-wrapper">
+
+                <div class="find-content">
+
+                    <div class="section-label">
+                        FIND BLOOD
+                    </div>
+
+                    <h2>
+                        Looking for a
+                        blood donor?
+                    </h2>
+
+                    <p>
+                        Search available donors by blood group
+                        and location.
+                    </p>
+
+                    <button class="find-btn" onclick="showLogin()">
+                        Find a Donor
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="search-preview">
+
+                    <div class="search-title">
+                        <i class="bi bi-search"></i>
+                        Donor Search
+                    </div>
+
+                    <div class="search-fields">
+
+                        <div class="fake-input">
+                            <small>Blood Group</small>
+                            <strong>O+</strong>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+
+                        <div class="fake-input">
+                            <small>Location</small>
+                            <strong>Ghaziabad</strong>
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="sample-donor">
+
+                        <div class="donor-avatar">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+
+                        <div>
+                            <strong>Available donor</strong>
+                            <small>O+ · Nearby</small>
+                        </div>
+
+                        <span class="available-badge">
+                            Available
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= IMPACT ================= -->
+
+    <section class="impact-section">
+
+        <div class="container">
+
+            <div class="impact-header">
+
+                <div>
+
+                    <div class="section-label">
+                        DONATION IMPACT
+                    </div>
+
+                    <h2>
+                        A small act can create
+                        a meaningful impact.
+                    </h2>
+
+                </div>
+
+                <p>
+                    Blood donation plays an important role in
+                    supporting patients who require transfusions.
+                </p>
+
+            </div>
+
+
+            <div class="impact-grid">
+
+                <div class="impact-main">
+
+                    <div class="impact-drop">
+                        <i class="bi bi-droplet-fill"></i>
+                    </div>
+
+                    <div>
+                        <span class="impact-number">01</span>
+                        <h3>Blood donation</h3>
+                        <p>
+                            Your donation enters a healthcare
+                            system where it can help patients
+                            who require blood.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="impact-stat">
+                    <strong>8</strong>
+                    <span>Major blood groups</span>
+                </div>
+
+                <div class="impact-stat">
+                    <strong>24/7</strong>
+                    <span>Access to requests</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= BLOOD GROUPS ================= -->
+
+    <section class="blood-section">
+
+        <div class="container">
+
+            <div class="section-heading center-heading">
+
+                <div class="section-label">
+                    BLOOD GROUPS
+                </div>
+
+                <h2>
+                    Know your blood group.
+                </h2>
+
+                <p>
+                    BloodConnect supports all major ABO and Rh
+                    blood groups.
+                </p>
+
+            </div>
+
+
+            <div class="blood-groups">
+
+                <div class="group-card">
+                    <span>A+</span>
+                    <small>A Positive</small>
+                </div>
+
+                <div class="group-card">
+                    <span>A−</span>
+                    <small>A Negative</small>
+                </div>
+
+                <div class="group-card">
+                    <span>B+</span>
+                    <small>B Positive</small>
+                </div>
+
+                <div class="group-card">
+                    <span>B−</span>
+                    <small>B Negative</small>
+                </div>
+
+                <div class="group-card">
+                    <span>AB+</span>
+                    <small>AB Positive</small>
+                </div>
+
+                <div class="group-card">
+                    <span>AB−</span>
+                    <small>AB Negative</small>
+                </div>
+
+                <div class="group-card">
+                    <span>O+</span>
+                    <small>O Positive</small>
+                </div>
+
+                <div class="group-card">
+                    <span>O−</span>
+                    <small>O Negative</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= EMERGENCY ================= -->
+
+    <section class="emergency-section">
+
+        <div class="container">
+
+            <div class="emergency-box">
+
+                <div class="emergency-icon">
+                    <i class="bi bi-exclamation-lg"></i>
+                </div>
+
+                <div class="emergency-content">
+
+                    <div class="section-label emergency-label">
+                        EMERGENCY BLOOD REQUEST
+                    </div>
+
+                    <h2>
+                        Need blood urgently?
+                    </h2>
+
+                    <p>
+                        Create an emergency request with the required
+                        blood group, hospital and location details.
+                    </p>
+
+                </div>
+
+                <button onclick="showLogin()" class="emergency-btn">
+                    Request Blood
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about-section">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-6">
+
+                    <div class="section-label">
+                        ABOUT BLOODCONNECT
+                    </div>
+
+                    <h2>
+                        Technology connecting
+                        people when it matters.
+                    </h2>
+
+                    <p>
+                        BloodConnect is a Blood Donation &
+                        Request Management System designed to
+                        simplify the process of finding donors
+                        and managing blood requests.
+                    </p>
+
+                    <p>
+                        The platform brings donors and receivers
+                        together through registration, blood-group
+                        matching, location-based donor discovery,
+                        request management and donation tracking.
+                    </p>
+
+                </div>
+
+
+                <div class="col-lg-6">
+
+                    <div class="tech-card">
+
+                        <div class="tech-card-header">
+                            <span>Technology Stack</span>
+                            <i class="bi bi-code-slash"></i>
+                        </div>
+
+                        <div class="tech-list">
+
+                            <div>
+                                <i class="bi bi-filetype-html"></i>
+                                <span>HTML / CSS / JavaScript</span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-bootstrap"></i>
+                                <span>Bootstrap</span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-node-plus-fill"></i>
+                                <span>Node.js + Express.js</span>
+                            </div>
+
+                            <div>
+                                <i class="bi bi-database"></i>
+                                <span>MongoDB</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FUTURE SCOPE ================= -->
+
+    <section class="future-section">
+
+        <div class="container">
+
+            <div class="section-heading center-heading">
+
+                <div class="section-label">
+                    FUTURE SCOPE
+                </div>
+
+                <h2>
+                    Built with room to grow.
+                </h2>
+
+                <p>
+                    BloodConnect can evolve into a larger
+                    healthcare connectivity platform.
+                </p>
+
+            </div>
+
+
+            <div class="future-grid">
+
+                <div>
+                    <i class="bi bi-phone"></i>
+                    <h3>Android App</h3>
+                    <p>Mobile access for donors and receivers.</p>
+                </div>
+
+                <div>
+                    <i class="bi bi-stars"></i>
+                    <h3>AI Recommendations</h3>
+                    <p>Smarter donor recommendation systems.</p>
+                </div>
+
+                <div>
+                    <i class="bi bi-hospital"></i>
+                    <h3>Hospital Integration</h3>
+                    <p>Connect hospitals and blood banks.</p>
+                </div>
+
+                <div>
+                    <i class="bi bi-geo-alt"></i>
+                    <h3>GPS Matching</h3>
+                    <p>Location-aware donor discovery.</p>
+                </div>
+
+                <div>
+                    <i class="bi bi-bell"></i>
+                    <h3>Push Notifications</h3>
+                    <p>Instant request notifications.</p>
+                </div>
+
+                <div>
+                    <i class="bi bi-qr-code"></i>
+                    <h3>QR Donor Card</h3>
+                    <p>Digital donor identification.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FINAL CTA ================= -->
+
+    <section class="final-cta">
+
+        <div class="container">
+
+            <div class="final-cta-box">
+
+                <div>
+
+                    <div class="section-label light-label">
+                        BE THE CONNECTION
+                    </div>
+
+                    <h2>
+                        Someone may need
+                        your blood today.
+                    </h2>
+
+                    <p>
+                        Register with BloodConnect and become
+                        part of a connected donor community.
+                    </p>
+
+                </div>
+
+                <button onclick="showRegister()" class="btn-white">
+                    Become a Donor
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+
+                    <div class="navbar-brand">
+                        <span class="brand-icon">
+                            <i class="bi bi-droplet-fill"></i>
+                        </span>
+
+                        Blood<span>Connect</span>
+                    </div>
+
+                    <p>
+                        Connecting donors with people
+                        who need blood.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h4>Platform</h4>
+
+                    <a href="#home">Home</a>
+                    <a href="#find-donor">Find Donors</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#about">About</a>
+
+                </div>
+
+
+                <div>
+
+                    <h4>For Users</h4>
+
+                    <a href="#" onclick="showRegister(); return false;">
+                        Become a Donor
+                    </a>
+
+                    <a href="#" onclick="showLogin(); return false;">
+                        Request Blood
+                    </a>
+
+                    <a href="#" onclick="showLogin(); return false;">
+                        Log in
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <h4>Project</h4>
+
+                    <a href="#about">Technology</a>
+                    <a href="#how-it-works">Workflow</a>
+                    <a href="#about">About BloodConnect</a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 BloodConnect. All rights reserved.
+                </span>
+
+                <span>
+                    Blood Donation & Request Management System
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= REGISTER MODAL ================= -->
+
+    <div class="modal-overlay" id="registerModal">
+
+        <div class="auth-modal">
+
+            <button class="close-modal" onclick="closeRegister()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+            <div class="auth-icon">
+                <i class="bi bi-droplet-fill"></i>
+            </div>
+
+            <h2>Create your account</h2>
+
+            <p class="auth-subtitle">
+                Join BloodConnect and help save lives.
+            </p>
+
+            <form id="registerForm">
+
+                <div class="form-group">
+                    <label>Full name</label>
+
+                    <input
+                        type="text"
+                        id="registerName"
+                        placeholder="Enter your name"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Enter your email"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Create a password"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label>I want to register as</label>
+
+                    <select id="registerRole" required>
+
+                        <option value="">
+                            Select role
+                        </option>
+
+                        <option value="donor">
+                            Blood Donor
+                        </option>
+
+                        <option value="receiver">
+                            Blood Receiver
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <button type="submit" class="auth-submit">
+
+                    Create account
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+            <p id="registerMessage" class="auth-message"></p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SCRIPTS ================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
