@@ -38,7 +38,32 @@ const donationSchema = new mongoose.Schema({
     donationDate: {
         type: Date,
         default: Date.now
+    },
+
+    // Certificate verification
+    verificationStatus: {
+        type: String,
+        enum: ["pending", "verified", "rejected"],
+        default: "pending"
+    },
+
+    verifiedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: null
+    },
+
+    verifiedAt: {
+        type: Date,
+        default: null
+    },
+
+    certificateId: {
+        type: String,
+        unique: true,
+        sparse: true
     }
+
 });
 
 module.exports = mongoose.model("Donation", donationSchema);

@@ -264,6 +264,8 @@ document.getElementById("receiverNavigation").style.display="none";
                     "Manage your donor profile, blood requests and donation history.";
             }
 
+            
+
         } else {
 
             document.getElementById(
@@ -2496,3 +2498,523 @@ function filterAdminUsers() {
             : "none";
     });
 }
+
+
+function adminShowDonations() {
+
+    const usersSection =
+        document.getElementById("usersSection");
+
+    const requestsSection =
+        document.getElementById("requestsSection");
+
+    // Hide other management sections
+    if (usersSection) {
+        usersSection.style.display = "none";
+    }
+
+    if (requestsSection) {
+        requestsSection.style.display = "none";
+    }
+
+    // Create donations section if it doesn't exist
+    let donationsSection =
+        document.getElementById("donationsSection");
+
+    if (!donationsSection) {
+
+        donationsSection =
+            document.createElement("section");
+
+        donationsSection.id = "donationsSection";
+        donationsSection.className = "admin-section";
+
+        donationsSection.innerHTML = `
+            <div class="admin-section-header">
+                <div>
+                    <span class="admin-section-label">
+                        DONATION MANAGEMENT
+                    </span>
+
+                    <h2>Donation Verification</h2>
+
+                    <p>
+                        Review completed donations and verify
+                        them before issuing certificates.
+                    </p>
+                </div>
+            </div>
+
+            <div id="adminDonations">
+                <div class="admin-table-empty">
+                    Loading donations...
+                </div>
+            </div>
+        `;
+
+        document.querySelector(".admin-main").appendChild(
+            donationsSection
+        );
+    }
+
+    donationsSection.style.display = "block";
+
+    donationsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+    loadAdminDonations();
+}
+
+async function loadAdminDonations() {
+
+    const container =
+        document.getElementById("adminDonations");
+
+    if (!container) return;
+
+    const token =
+        localStorage.getItem("bloodConnectToken");
+
+    try {
+
+        const response =
+            await fetch("/api/admin/donations", {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message || "Unable to load donations"
+            );
+        }
+
+        if (data.donations.length === 0) {
+
+            container.innerHTML = `
+                <div class="admin-table-empty">
+
+                    <i class="bi bi-heart-pulse"></i>
+
+                    <h3>No donations found</h3>
+
+                    <p>
+                        No completed donations are currently recorded.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+        container.innerHTML = `
+
+            <div class="admin-data-toolbar">
+
+                <div class="admin-data-summary">
+                    <strong>${data.donations.length}</strong>
+                    <span>donations recorded</span>
+                </div>
+
+            </div>
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-data-table">
+
+                    <thead>
+                        <tr>
+                            <th>Donor</th>
+                            <th>Blood</th>
+                            <th>Hospital</th>
+                            <th>Date</th>
+                            <th>Verification</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        ${data.donations.map(donation => `
+
+                            <tr>
+
+                                <td>
+                                    <div class="admin-person-cell">
+
+                                        <div class="admin-person-avatar donor-avatar">
+                                            ${
+                                                donation.donor?.name
+                                                    ?.charAt(0)
+                                                    ?.toUpperCase() || "D"
+                                            }
+                                        </div>
+
+                                        <div>
+                                            <strong>
+                                                ${
+                                                    donation.donor?.name ||
+                                                    "Unknown"
+                                                }
+                                            </strong>
+                                            <span>
+                                                ${
+                                                    donation.donor?.email ||
+                                                    ""
+                                                }
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <span class="admin-blood-badge">
+                                        ${donation.bloodGroup}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span class="admin-location-cell">
+                                        <i class="bi bi-hospital"></i>
+                                        ${donation.hospital}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    ${new Date(
+                                        donation.donationDate
+                                    ).toLocaleDateString("en-IN")}
+                                </td>
+
+                                <td>
+
+                                    <span class="admin-request-status ${
+                                        donation.verificationStatus
+                                    }">
+
+                                        <span></span>
+
+                                        ${
+                                            donation.verificationStatus
+                                                .charAt(0)
+                                                .toUpperCase()
+                                            +
+                                            donation.verificationStatus.slice(1)
+                                        }
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    ${
+                                        donation.verificationStatus === "pending"
+                                        ?
+                                        `
+                                        <button
+                                            class="dashboard-primary-btn"
+                                            onclick="verifyDonation('${donation._id}')"
+                                        >
+                                            Verify
+                                            <i class="bi bi-patch-check"></i>
+                                        </button>
+                                        `
+                                        :
+                                        `
+                                        <span class="admin-muted-value">
+                                            ${
+                                                donation.certificateId ||
+                                                "Verified"
+                                            }
+                                        </span>
+                                        `
+                                    }
+
+                                </td>
+
+                            </tr>
+
+                        `).join("")}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        `;
+
+    } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+            <div class="admin-table-empty">
+
+                <i class="bi bi-exclamation-circle"></i>
+
+                <h3>Unable to load donations</h3>
+
+                <p>
+                    Please try again.
+                </p>
+
+            </div>
+        `;
+    }
+}
+
+
+async function verifyDonation(donationId) {
+
+    const currentUser =
+        JSON.parse(
+            localStorage.getItem("bloodConnectUser")
+        );
+
+    if (!currentUser || currentUser.role !== "admin") {
+        alert("Only an administrator can verify donations.");
+        return;
+    }
+
+    const confirmed =
+        confirm(
+            "Confirm that this donation has been verified by the responsible organization or blood bank?"
+        );
+
+    if (!confirmed) return;
+
+    const token =
+        localStorage.getItem("bloodConnectToken");
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/donations/${donationId}/verify`,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+
+                    body: JSON.stringify({
+                        verifierId: currentUser.id
+                    })
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message ||
+                "Unable to verify donation"
+            );
+        }
+
+        alert(
+            `Donation verified successfully.\n\nCertificate ID: ${data.donation.certificateId}`
+        );
+
+        // Refresh the donation list
+        loadAdminDonations();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            error.message ||
+            "Unable to verify donation."
+        );
+    }
+}
+
+
+async function loadDonorCertificates() {
+
+    const container =
+        document.getElementById("certificateList");
+
+    if (!container) return;
+
+    const currentUser =
+        JSON.parse(
+            localStorage.getItem("bloodConnectUser")
+        );
+
+    if (!currentUser || currentUser.role !== "donor") {
+
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="bi bi-shield-lock"></i>
+                <h3>Donor account required</h3>
+                <p>Please log in with your donor account.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/donations/donor/${currentUser.id}`
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message ||
+                "Unable to load certificates"
+            );
+        }
+
+        const verifiedDonations =
+            data.donations.filter(
+                donation =>
+                    donation.verificationStatus === "verified"
+            );
+
+        if (verifiedDonations.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+
+                    <i class="bi bi-award"></i>
+
+                    <h3>No certificates yet</h3>
+
+                    <p>
+                        Your certificates will appear here
+                        after your donations are verified.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+        container.innerHTML =
+            verifiedDonations.map(
+                donation => `
+
+                    <div class="certificate-card">
+
+                        <div class="certificate-left">
+
+                            <div class="certificate-icon">
+                                <i class="bi bi-award-fill"></i>
+                            </div>
+
+                            <div class="certificate-info">
+
+                                <h3>
+                                    Blood Donation Certificate
+                                </h3>
+
+                                <p>
+                                    <strong>Certificate ID:</strong>
+                                    ${donation.certificateId}
+                                </p>
+
+                                <p>
+                                    <strong>Donation Date:</strong>
+                                    ${new Date(
+                                        donation.donationDate
+                                    ).toLocaleDateString("en-IN")}
+                                </p>
+
+                                <p>
+                                    <strong>Hospital:</strong>
+                                    ${donation.hospital}
+                                </p>
+
+                                <span class="certificate-status">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                    Verified
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="certificate-actions">
+
+                            <button
+                                class="certificate-btn primary"
+                                onclick="viewCertificate('${donation._id}')"
+                            >
+                                <i class="bi bi-eye"></i>
+                                View Certificate
+                            </button>
+
+                            <button
+                                class="certificate-btn secondary"
+                                onclick="downloadCertificate('${donation._id}')"
+                            >
+                                <i class="bi bi-download"></i>
+                                Download PDF
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `
+            ).join("");
+
+    } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+            <div class="empty-state">
+
+                <i class="bi bi-exclamation-circle"></i>
+
+                <h3>Unable to load certificates</h3>
+
+                <p>
+                    Please try again later.
+                </p>
+
+            </div>
+        `;
+    }
+}
+
+if (window.location.pathname.endsWith("certificates.html")) {
+    loadDonorCertificates();
+}
+
+window.viewCertificate = function(donationId) {
+
+    window.location.href =
+        `/certificate-view.html?id=${donationId}`;
+
+};
+
+window.downloadCertificate = function(donationId) {
+
+    window.location.href =
+        `/certificate-view.html?id=${donationId}`;
+
+};

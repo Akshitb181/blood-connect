@@ -499,6 +499,68 @@ app.put("/api/requests/:id/complete", async (req, res) => {
     }
 });
 
+
+app.put("/api/donations/:id/verify", async (req, res) => {
+    try {
+
+        const { verifierId } = req.body;
+
+        if (!verifierId) {
+            return res.status(400).json({
+                message: "verifierId is required"
+            });
+        }
+
+        const verifier = await User.findById(verifierId);
+
+        if (!verifier || verifier.role !== "admin") {
+            return res.status(403).json({
+                message: "Only an authorized administrator can verify donations"
+            });
+        }
+
+        const donation = await Donation.findById(req.params.id);
+
+        if (!donation) {
+            return res.status(404).json({
+                message: "Donation not found"
+            });
+        }
+
+        if (donation.verificationStatus === "verified") {
+            return res.status(400).json({
+                message: "Donation is already verified"
+            });
+        }
+
+        donation.verificationStatus = "verified";
+        donation.verifiedBy = verifierId;
+        donation.verifiedAt = new Date();
+
+        // Generate a unique certificate ID
+        donation.certificateId =
+            "BC-" +
+            new Date().getFullYear() +
+            "-" +
+            donation._id.toString().slice(-8).toUpperCase();
+
+        await donation.save();
+
+        res.status(200).json({
+            message: "Donation verified successfully",
+            donation
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+});
+
 app.get("/api/donations/donor/:donorId", async (req, res) => {
     try {
         const donor = await User.findById(req.params.donorId);
@@ -522,6 +584,31 @@ app.get("/api/donations/donor/:donorId", async (req, res) => {
         });
 
     } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+});
+
+
+app.get("/api/admin/donations", async (req, res) => {
+    try {
+
+        const donations = await Donation.find()
+            .populate("donor", "name email bloodGroup")
+            .populate("receiver", "name email")
+            .populate("bloodRequest", "location hospital emergency")
+            .sort({ donationDate: -1 });
+
+        res.status(200).json({
+            count: donations.length,
+            donations
+        });
+
+    } catch (error) {
+
         console.error(error);
 
         res.status(500).json({
